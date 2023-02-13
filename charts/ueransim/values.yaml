@@ -19,14 +19,14 @@ global:
   #Global network parametes
   n2network:
     name: n2network
-    masterIf: eth0
+    masterIf: ens5 
     subnetIP: 10.100.50.248
     cidr: 29
     gatewayIP: 10.100.50.254
     excludeIP: 10.100.50.254
   n3network:
     name: n3network
-    masterIf: eth0
+    masterIf: ens5
     subnetIP: 10.100.50.232
     cidr: 29
     gatewayIP: 10.100.50.238
@@ -69,7 +69,7 @@ gnb:
   podAnnotations: {}
     # additional annotations
   imagePullSecrets: []
-  podSecurityContext: {}
+  podSecurityContext: 
   resources:
     requests:
       cpu: 250m
@@ -113,6 +113,8 @@ ue:
   imagePullSecrets: []
   podSecurityContext: {}
   securityContext:
+    allowPrivilegeEscalation: true
+    privileged: true
     capabilities:
             add: ["NET_ADMIN"]
   resources:
